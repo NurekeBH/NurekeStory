@@ -16,11 +16,14 @@
 
 ## Қайдан бастау
 
+**Алғаш рет:** [`docs/06-bastau.md`](docs/06-bastau.md) — Mac + VS Code + Claude Code
+орнату, содан кейін көшіріп жабыстыратын дайын промпт.
+
+**Материалды жинау (бір команда):**
 ```bash
+./tools/collect.sh                # донор өлшеу + транскрипт + кадрлар + миниатюралар
 python3 tools/check_inputs.py     # десте дайын ба?
 ```
-
-Қызыл жолдар болса — `docs/02-kiris-deste.md` оларды қалай жинауды айтады.
 
 ---
 
@@ -34,17 +37,19 @@ python3 tools/check_inputs.py     # десте дайын ба?
 | [`docs/03-master-prompt.md`](docs/03-master-prompt.md) | Claude Code-қа берілетін мастер-промпт (5 қадам) |
 | [`docs/04-olsheu.md`](docs/04-olsheu.md) | CTR/AVD диагностикасы, итерация журналы |
 | [`docs/05-kanal-pasporty.md`](docs/05-kanal-pasporty.md) | Канал аты, аватар, баннер, псевдоним, сипаттама, палитра, табу-тізім |
+| [`docs/06-bastau.md`](docs/06-bastau.md) | **Mac + VS Code нұсқаулығы** + дайын промпт + адам ғана істейтін жұмыс тізімі |
 
 ## Құралдар
 
 | Скрипт | Не істейді |
 |---|---|
+| `tools/collect.sh` | **Бәрін бір командамен жинайды** — төмендегі төртеуін қатарынан қосады |
 | `tools/donor_scan.py` | Канал өлшейді: жеделдеу, views/sub, аутлаер, ең үздік видеоның URL-і |
 | `tools/fetch_transcript.sh` | Ең үздік видеоның транскриптін тайм-кодпен жүктейді |
 | `tools/vtt_to_md.py` | VTT → тайм-кодты markdown + құрылым есебі (WPM, хук, блоктар) |
 | `tools/check_inputs.py` | 2-қадамға десте дайын ба — тексереді |
 
-Керегі: `pip install yt-dlp`
+Керегі: `pip3 install yt-dlp` және `brew install ffmpeg`
 
 ---
 
@@ -52,7 +57,7 @@ python3 tools/check_inputs.py     # десте дайын ба?
 
 ```
 1-қадам  донор табу + өлшеу          →  docs/01  ✅
-         транскрипт + скриншот       →  inputs/  ⏳
+         транскрипт + кадрлар        →  ./tools/collect.sh  ⏳
 2-қадам  Claude Code талдауы         →  output/  ⏳
 3-қадам  канал ашу + аватар/баннер   →  docs/05  ✅ дайын
 4-қадам  өндіріс (сурет+дауыс+монтаж)

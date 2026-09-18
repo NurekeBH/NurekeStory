@@ -24,11 +24,16 @@ def check_file(path, label, min_bytes=1):
     return False, f"{MISS} {label}  — жоқ: {path}"
 
 
-def check_glob(pattern, label, need=1):
-    hits = glob.glob(p(pattern))
+def check_glob(*patterns, label, need=1):
+    """Бірнеше шаблонның кез келгені сәйкес келсе — жарайды."""
+    hits = []
+    for pat in patterns:
+        hits += glob.glob(p(pat))
+    hits = sorted(set(hits))
     if len(hits) >= need:
         return True, f"{OK} {label}  ({len(hits)} файл)"
-    return False, f"{MISS} {label}  — {len(hits)}/{need}: {pattern}"
+    shown = " не ".join(patterns)
+    return False, f"{MISS} {label}  — {len(hits)}/{need}: {shown}"
 
 
 CHECKS = [
@@ -44,9 +49,12 @@ CHECKS = [
                            "Құрылым есебі"),
     ]),
     ("Скриншоттар", [
-        lambda: check_glob("inputs/screenshots/channel-home.*", "Канал басты беті"),
-        lambda: check_glob("inputs/screenshots/thumbnails.*", "Миниатюралар"),
-        lambda: check_glob("inputs/screenshots/frame-*.*", "Видеодан 5 кадр", need=5),
+        lambda: check_glob("inputs/screenshots/channel-home.*",
+                           "inputs/screenshots/channel-branding*.*",
+                           label="Канал брендингі"),
+        lambda: check_glob("inputs/screenshots/thumbnails.*", label="Миниатюралар"),
+        lambda: check_glob("inputs/screenshots/frame-*.*",
+                           label="Видеодан 5 кадр", need=5),
     ]),
 ]
 
@@ -70,10 +78,8 @@ def main():
         print("   docs/02-kiris-deste.md → «2-қадамды қалай бастау»")
         return 0
 
-    print("\nҚалғанын жинау:")
-    print("  python3 tools/donor_scan.py https://www.youtube.com/@MindToAct")
-    print("  ./tools/fetch_transcript.sh \"<ҮЗДІК_ВИДЕО_URL>\" mindtoact-top")
-    print("  скриншоттар → inputs/screenshots/")
+    print("\nҚалғанын жинау — бір команда:")
+    print("  ./tools/collect.sh")
     return 1
 
 
