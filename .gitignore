@@ -1,0 +1,44 @@
+# --- Ескі React Native қалдықтары (жергілікті дискіде қалуы мүмкін) ---
+node_modules/
+android/
+ios/
+__tests__/
+lib/
+App.js
+index.js
+app.json
+babel.config.js
+metro.config.js
+package.json
+package-lock.json
+yarn.lock
+Gemfile
+Gemfile.lock
+
+# --- OS ---
+.DS_Store
+Thumbs.db
+
+# --- Шикі донор материалы: РЕПОҒА ЕШҚАШАН КІРМЕЙДІ ---
+# Транскрипт пен скриншот — үшінші тараптың авторлық контенті.
+# Талдау үшін жергілікті керек, бірақ жариялауға болмайды.
+inputs/raw/*
+inputs/screenshots/*
+*.vtt
+*.srt
+*.mp3
+*.mp4
+*.png
+*.jpg
+*.jpeg
+*.webp
+
+# --- Жұмыс файлдары ---
+.venv/
+__pycache__/
+*.pyc
+.env
+
+# Папка құрылымы клондағанда көрінуі үшін
+!inputs/raw/.gitkeep
+!inputs/screenshots/.gitkeep
