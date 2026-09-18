@@ -1,6 +1,0 @@
-module Pods_SmartTop_SmartTopTests {
-  umbrella header "Pods-SmartTop-SmartTopTests-umbrella.h"
-
-  export *
-  module * { export * }
-}
